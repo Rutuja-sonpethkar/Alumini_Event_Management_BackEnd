@@ -53,6 +53,7 @@ public class AdminController
 			 throw new AdminNotFoundException("There is no data in the database");
 		}
 	}
+	//Search Admin Api 
 	@GetMapping("/serchAdminById/{aid}")
 	public Admin serchAdminById(@PathVariable("aid") Integer id)
 	{
