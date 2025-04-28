@@ -14,33 +14,32 @@ public class AlumniService
    @Autowired
    AlumniRepostory alumniRepo;
    
-//   public boolean isAddNewAlumni(Alumni alumni)
-//   {
-//	return alumniRepo.isAddNewAlumni(alumni);
-//	   
-//   }
    
-   public void addAlumni(Alumni alumni) {
-	   alumniRepo.addAlumni(alumni);
-   }  
-//   public List<Alumni>getAllAlumni()
-//   {
-//	return alumniRepo.getAllAlumni();
-//	   
-//   }
-//   
-//   public Alumni getAlumniById(int id)
-//   {
-//	   return alumniRepo.getAlumniById(id);
-//   }
-//   public boolean isDeleteAlumiById(int id)
-//   {
-//	return alumniRepo.isDeleteAlumiById(id);
-//	   
-//   }
-//   public boolean isUpdateAlumni(Alumni alumni)
-//   {
-//	return alumniRepo.isUpdateAlumni(alumni);
-//	   
-//   }
+  
+   public boolean isAddNewAlumni(Alumni alumni)
+   {
+	return alumniRepo.isAddNewAlumni(alumni);
+	   
+   }
+   
+  
+   public List<Alumni>getAllAlumni()
+   {
+	return alumniRepo.getAllAlumni();
+	   
+   }
+   
+   public Alumni getAlumniById(int id)
+   {
+	   return alumniRepo.getAlumniById(id);
+   }
+   public boolean isDeleteAlumiById(int id)
+   {
+	return alumniRepo.isDeleteAlumiById(id);
+	   
+   }
+   public boolean isUpdateAlumni(Alumni alumni)
+   {
+	return alumniRepo.isUpdateAlumni(alumni);   
+   }
 }

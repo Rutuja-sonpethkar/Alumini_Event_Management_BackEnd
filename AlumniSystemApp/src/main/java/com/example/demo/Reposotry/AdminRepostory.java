@@ -20,26 +20,21 @@ public class AdminRepostory
 	List<Admin>list;
 	@Autowired
 	JdbcTemplate template;
-	
-	public boolean isAddNewAdmin(Admin admin)
-	{
-		int value=template.update("insert into admin values('0', ?,?,?,?,?)", new PreparedStatementSetter()
-				{
-
-					@Override
-					public void setValues(PreparedStatement ps) throws SQLException {
-						
-						ps.setString(1,admin.getName());
-						ps.setString(2, admin.getEmail());
-						ps.setString(3, admin.getUsername());
-						ps.setString(4,admin.getPassword());
-						ps.setString(5, admin.getRole());
-						
-					}
-			
-				});
-		return value>0?true:false;
+	public boolean isAddNewAdmin(Admin admin) {
+	    int value = template.update(
+	        "INSERT INTO admin (Admin_name, email, contact, role) VALUES (?, ?, ?, ?)",
+	        ps -> {
+	            ps.setString(1, admin.getName());
+	            ps.setString(2, admin.getEmail());
+	            ps.setString(3, admin.getContact());
+	            ps.setString(4, admin.getRole());
+	        }
+	    );
+	    return value > 0;
 	}
+
+	
+
 	
 	
 	public List<Admin>getAllAdmin()
@@ -53,9 +48,9 @@ public class AdminRepostory
 					add.setId(rs.getInt(1));
 					add.setName(rs.getString(2));
 					add.setEmail(rs.getString(3));
-					add.setUsername(rs.getString(4));
-					add.setPassword(rs.getString(5));
-					add.setRole(rs.getString(6));
+					add.setContact(rs.getString(4));
+					add.setRole(rs.getString(5));
+					
 						return add;
 					}
 			
@@ -75,9 +70,8 @@ public class AdminRepostory
 			add.setId(rs.getInt(1));
 			add.setName(rs.getString(2));
 			add.setEmail(rs.getString(3));
-			add.setUsername(rs.getString(4));
-			add.setPassword(rs.getString(5));
-			add.setRole(rs.getString(6));
+			add.setRole(rs.getString(4));
+			add.setContact(rs.getString(5));
 				return add;
 			}
 	
@@ -92,7 +86,7 @@ public class AdminRepostory
 	
 	public boolean isUpadte(Admin admin)
 	{
-		int value=template.update("update admin set Admin_name=?,email=?,username=?,password=?,role=? where aid=?", new PreparedStatementSetter()
+		int value=template.update( "UPDATE admin SET Admin_name = ?, email = ?, contact = ?, role = ? WHERE aid = ?", new PreparedStatementSetter()
 				{
 
 					@Override
@@ -100,10 +94,9 @@ public class AdminRepostory
 					{
 						ps.setString(1, admin.getName());
 						ps.setString(2, admin.getEmail());
-						ps.setString(3, admin.getUsername());
-						ps.setString(4, admin.getPassword());
-						ps.setString(5, admin.getRole());
-						ps.setInt(6, admin.getId());
+						ps.setString(3, admin.getRole());
+						ps.setString(4, admin.getContact());
+						ps.setInt(5, admin.getId());
 						
 						
 					}
