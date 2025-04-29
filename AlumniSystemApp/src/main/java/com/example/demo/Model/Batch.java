@@ -13,6 +13,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Batch {
 	private int bid;
-	private String batch;
+	private String batchyear;
 
 }

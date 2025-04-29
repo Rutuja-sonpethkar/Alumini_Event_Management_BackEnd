@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Admin
 {
-   private int id;
-   private String name;
-   private String email;
-   private String username;
-   private String password;
-   private String role;
+	 private int id;
+	   private String name;
+	   private String email;
+	   private String contact;
+	   private String role;
+  
 }
