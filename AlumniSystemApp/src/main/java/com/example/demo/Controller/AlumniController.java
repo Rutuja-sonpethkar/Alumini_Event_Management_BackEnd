@@ -134,4 +134,23 @@ public class AlumniController
 	   
 	   
    }
+   @GetMapping("/alumnidata/{sid}")
+   public List  getAlumniByIdd(@PathVariable("sid") Integer sid)
+   {
+       List list= alumniservice.getAlumniByIdd(sid);
+       
+       System.out.println("==========="+list);
+       
+       
+       return list;
+   }
+   
+   @PostMapping("/studentlogin")
+   public String studentlogin(@RequestBody Alumni alumni) {
+	   boolean b=alumniservice.studentlogin(alumni.getEmail(),alumni.getMobileNo());
+	   if(b)return  "login success......";
+	   else
+	   return "login failed......";
+   }
+
 }

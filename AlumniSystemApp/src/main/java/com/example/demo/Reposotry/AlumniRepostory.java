@@ -6,7 +6,9 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.relational.domain.RowDocument;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -124,6 +126,90 @@ public class AlumniRepostory
 	    return value > 0;  
 	}
 
+	
+	public List getAlumniByIdd(int sid) {
+	    String query = "SELECT * FROM alumni WHERE sid = ?";
+	    
+	    List<Alumni> result = template.query(
+	        query,
+	        new Object[]{sid},
+	         new RowMapper<>() {
+
+				@Override
+				public Alumni mapRow(ResultSet rs, int rowNum) throws SQLException {
+					
+					Alumni a=new Alumni();
+					a.setSid(rs.getInt(1));
+					a.setName(rs.getString(2));
+					a.setEmail(rs.getString(3));
+					a.setMobileNo(rs.getString(4));
+					a.setIsEnablestudent(rs.getString(5));
+				
+					a.setUid(rs.getInt(6));
+					a.setDid(rs.getInt(7));
+					a.setBid(rs.getInt(8));
+					
+					
+					return a;
+				}
+	        	
+	        }
+	    );
+	    
+//	    result.forEach(e->System.out.println(e.getBid()+" "+e.getIsEnablestudent()));
+	    return result;
+	}
+
+
+
+
+	public boolean studentlogin(String email, String mobileNo) {
+		String query="select s_email, Mobile_no from alumni where s_email=? and  Mobile_no=?";
+		int value=(template.query(query, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, email);
+				ps.setString(2, mobileNo);
+			}
+		}, new RowMapper() {
+
+			@Override
+			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return null;
+			}
+		})).size();
+		
+		return value>0?true:false;
+	}
+
+	
+	/*
+	public List getAlumniByIdd(int sid) {
+		
+		 String query = "SELECT * FROM alumni WHERE sid = ?";
+		 
+		 List<Alumni> list=template.query(query, new Object[]{sid},new RowMapper() {
+
+			@Override
+			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+				
+				Alumni a=new Alumni();
+				a.setSid(rs.getInt(1));
+				a.setName(rs.getString(2));
+				a.setEmail(rs.getString(3));
+				a.setMobileNo(rs.getString(4));
+				a.setIsEnablestudent(rs.getString(5));
+				
+				System.err.println(a.getIsEnablestudent());
+				return a;
+			}
+			 
+		 });
+		 
+		return list;
+	}
+	*/
 
 
 		

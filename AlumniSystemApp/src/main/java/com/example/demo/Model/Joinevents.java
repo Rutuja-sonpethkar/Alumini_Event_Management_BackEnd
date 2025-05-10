@@ -13,9 +13,14 @@ import lombok.ToString;
 @ToString
 public class Joinevents 
 {
- private String eventnamme;
+ 
+ private int eid;
+ private String eventname;
   private String location;
   private String date;
+  private int sid;
+  private String attendevent;
+  private int AssignedStudentCount;
  
 
   

@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Events {
 
-	private int eid;
+	private Integer eid;
 	private String name;
 	private String location;
 	public Events(String name, String location, String date) {

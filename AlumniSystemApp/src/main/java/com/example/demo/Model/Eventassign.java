@@ -19,6 +19,6 @@ public class Eventassign
 	private int sid;
 	private String attendevent;
 	private int bid;
-	private int AssignedStudentCount;
-	private Joinevents jevents;
+//	private int AssignedStudentCount;
+//	private Joinevents jevents;
 }

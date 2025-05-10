@@ -1,4 +1,7 @@
+
 package com.example.demo.Model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +21,9 @@ public class Feedback
    private String description;
    private String feedbackDate;
    private int sid;
+   private String sname;
+   @JsonProperty("eventId")
+   private Integer eid;
+   private String eventname;
+   
 }

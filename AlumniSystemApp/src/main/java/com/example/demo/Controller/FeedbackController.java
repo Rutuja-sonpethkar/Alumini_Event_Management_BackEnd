@@ -29,7 +29,11 @@ public class FeedbackController
 	
 	@PostMapping("/AddFeedback")
 	public boolean isAddnewfeedback(@RequestBody   Feedback feedback)
+	
 	{
+		
+		System.out.println(feedback.getEid());
+	
 		System.out.println(feedback);
 //		return true;
 		return feedbackservice.isAddnewfeedback(feedback);
@@ -39,6 +43,9 @@ public class FeedbackController
 	public List<Feedback> getAllFeedback()
 	{
 		List<Feedback>list=feedbackservice.getAllFeedback();
+		
+		
+		
 		if(list.size()!=0)
 		{
 			return list;
@@ -80,5 +87,20 @@ public class FeedbackController
 		}
 		
 		
+	}
+	@GetMapping("/showstudentfeedback/{sid}")
+	public List<Feedback> getFeedbacksByStudentId(@PathVariable("sid") Integer sid) {
+
+		List<Feedback> list = feedbackservice.getFeedbacksByStudentId(sid);
+
+//		System.err.println(list);
+		System.out.println(list);
+	
+		if (list.size() != 0) {
+			return list;
+		} else {
+			throw new AdminNotFoundException("there is no data in database");
+		}
+
 	}
 }
