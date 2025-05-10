@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,12 +44,46 @@ public class EventassignService {
 	{
 		return assignrepo.assignEventToStudent(eid, sid);
 		
+		
 	}
-	public List<Eventassign> getEventDetails() 
+//	public List<Eventassign> getEventDetails() 
+//	{
+//		
+//		System.out.println("==================>"+assignrepo.getEventDetails().toString());
+//		return assignrepo.getEventDetails();
+//		
+//	}
+	
+	public List<Joinevents> geteventdetails() 
 	{
-		
-		System.out.println("==================>"+assignrepo.getEventDetails().toString());
-		return assignrepo.getEventDetails();
+		return assignrepo.geteventdetails();
 		
 	}
+	public List getAssignedEventsByStudentId( int sid)
+	{
+		return assignrepo.getAssignedEventsByStudentId(  sid);
+		
+	}
+	public List<Map<String, Object>> getAvailableEventsForStudent(int sid) {
+        return assignrepo.getAvailableEventsForStudent(sid);
+    }
+	
+	
+	
+	public List<Joinevents> getAssignedEventsByBatchId(int bid)
+	{
+		return assignrepo.getAssignedEventsByBatchId(bid);
+		
+	}
+	
+	
+	public boolean applyForEvent(int sid, int eid) {
+        return assignrepo.updateAttendance(sid, eid);
+    }
+
+	  public boolean cancelEventRegistration(int eid, int sid) {
+	        return assignrepo.cancelEventRegistration(eid, sid);
+	    }
+
+	
 }

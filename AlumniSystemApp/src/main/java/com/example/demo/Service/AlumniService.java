@@ -42,4 +42,16 @@ public class AlumniService
    {
 	return alumniRepo.isUpdateAlumni(alumni);   
    }
+   
+   public List getAlumniByIdd(int sid)
+   {
+	return alumniRepo.getAlumniByIdd(sid);
+	   
+   }
+
+
+public boolean studentlogin(String email, String mobileNo) {
+	
+	return alumniRepo.studentlogin(email,mobileNo);
+}
 }

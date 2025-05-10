@@ -36,4 +36,10 @@ public class FeeddbackService
 		
 		
 	}
+	
+	public List<Feedback> getFeedbacksByStudentId(int sid)
+	{
+		return feedbackRepo.getFeedbacksByStudentId(sid);
+		
+	}
 }
