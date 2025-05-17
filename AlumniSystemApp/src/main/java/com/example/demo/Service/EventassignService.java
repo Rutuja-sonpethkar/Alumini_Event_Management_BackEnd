@@ -84,6 +84,9 @@ public class EventassignService {
 	  public boolean cancelEventRegistration(int eid, int sid) {
 	        return assignrepo.cancelEventRegistration(eid, sid);
 	    }
-
+	  
+	  public List<Joinevents> getEventAttendance() {
+	        return assignrepo.getEventAttendance();
+	  }
 	
 }
