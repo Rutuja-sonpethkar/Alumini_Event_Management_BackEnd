@@ -444,14 +444,52 @@ public class EventassignRepo
 	    String sql = "SELECT e.eid, e.eventname, e.location, e.date, ea.attendevent " +
 	                 "FROM events e " +
 	                 "JOIN eventassign ea ON e.eid = ea.eid " +
-	                 "WHERE ea.sid = ? AND ea.attendevent = 'yes'";
+	                 "WHERE ea.sid = ? AND ea.attendevent IN ('yes', 'no')";
 	    return template.queryForList(sql, sid);
 	}
+
+
 
 	public boolean cancelEventRegistration(int eid, int sid) {
         String sql = "UPDATE eventassign SET attendevent = 'no' WHERE eid = ? AND sid = ?";
         int rows = template.update(sql, eid, sid);
         return rows > 0;
     }
+	
+	
+	public List<Joinevents> getEventAttendance() {
+	    String sql = """
+	        SELECT 
+	            e.eid,
+	            e.eventname,
+	            e.location,
+	            e.date,
+	            a.sid,
+	            a.name AS studentname,
+	            CASE 
+	                WHEN LOWER(TRIM(ea.attendevent)) IN ('yes', 'yse') THEN 'Present'
+	                ELSE 'Absent'
+	            END AS attendevent
+	        FROM 
+	            eventassign ea
+	        JOIN 
+	            alumni a ON ea.sid = a.sid
+	        JOIN 
+	            events e ON ea.eid = e.eid
+	        """;
+
+	    return template.query(sql, (rs, rowNum) -> {
+	        Joinevents je = new Joinevents();
+	        je.setEid(rs.getInt("eid"));
+	        je.setEventname(rs.getString("eventname"));
+	        je.setLocation(rs.getString("location"));
+	        je.setDate(rs.getString("date"));
+	        je.setSid(rs.getInt("sid"));
+	        je.setStudentname(rs.getString("studentname"));
+	        je.setAttendevent(rs.getString("attendevent"));
+	        return je;
+	    });
+	}
+
 }
  

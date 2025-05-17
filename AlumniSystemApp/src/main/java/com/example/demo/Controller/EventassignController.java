@@ -174,7 +174,9 @@ public class EventassignController {
     }
     
     @GetMapping("/studentassignevents/{sid}")
+    
     public List<Map<String, Object>> getEventsForStudent(@PathVariable int sid) {
+    	  System.out.println("Received SID: " + sid); 
         return service.getAvailableEventsForStudent(sid);
     }
     @PostMapping("/cancle/{sid}/{eid}")
@@ -188,4 +190,8 @@ public class EventassignController {
 		
     }
 
+    @GetMapping("/attendance")
+    public List<Joinevents> getEventAttendance() {
+        return service.getEventAttendance();
+    }
 }

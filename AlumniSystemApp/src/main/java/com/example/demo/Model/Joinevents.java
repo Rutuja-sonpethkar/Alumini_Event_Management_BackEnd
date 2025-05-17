@@ -19,6 +19,7 @@ public class Joinevents
   private String location;
   private String date;
   private int sid;
+  private String studentname;
   private String attendevent;
   private int AssignedStudentCount;
  
